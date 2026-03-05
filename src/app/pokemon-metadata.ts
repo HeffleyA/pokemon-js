@@ -149,6 +149,19 @@ import pokemon148 from "../assets/pokemon/front/148.png";
 import pokemon149 from "../assets/pokemon/front/149.png";
 import pokemon150 from "../assets/pokemon/front/150.png";
 import pokemon151 from "../assets/pokemon/front/151.png";
+import pokemon152 from "../assets/pokemon/front/152.png";
+import pokemon153 from "../assets/pokemon/front/153.png";
+import pokemon154 from "../assets/pokemon/front/154.png";
+import pokemon155 from "../assets/pokemon/front/155.png";
+import pokemon156 from "../assets/pokemon/front/156.png";
+import pokemon157 from "../assets/pokemon/front/157.png";
+import pokemon158 from "../assets/pokemon/front/158.png";
+import pokemon159 from "../assets/pokemon/front/159.png";
+import pokemon160 from "../assets/pokemon/front/160.png";
+import pokemon161 from "../assets/pokemon/front/161.png";
+import pokemon162 from "../assets/pokemon/front/162.png";
+import pokemon163 from "../assets/pokemon/front/163.png";
+import pokemon164 from "../assets/pokemon/front/164.png";
 
 import back1 from "../assets/pokemon/back/1.png";
 import back2 from "../assets/pokemon/back/2.png";
@@ -301,6 +314,19 @@ import back148 from "../assets/pokemon/back/148.png";
 import back149 from "../assets/pokemon/back/149.png";
 import back150 from "../assets/pokemon/back/150.png";
 import back151 from "../assets/pokemon/back/151.png";
+import back152 from "../assets/pokemon/back/152.png";
+import back153 from "../assets/pokemon/back/153.png";
+import back154 from "../assets/pokemon/back/154.png";
+import back155 from "../assets/pokemon/back/155.png";
+import back156 from "../assets/pokemon/back/156.png";
+import back157 from "../assets/pokemon/back/157.png";
+import back158 from "../assets/pokemon/back/158.png";
+import back159 from "../assets/pokemon/back/159.png";
+import back160 from "../assets/pokemon/back/160.png";
+import back161 from "../assets/pokemon/back/161.png";
+import back162 from "../assets/pokemon/back/162.png";
+import back163 from "../assets/pokemon/back/163.png";
+import back164 from "../assets/pokemon/back/164.png";
 
 export interface PokemonMetadata {
   baseExperience: number;
@@ -4680,6 +4706,388 @@ const pokemonMetadata: Record<number, PokemonMetadata> = {
     },
     types: ["psychic"],
     baseCatchRate: 45,
+  },
+  "152": {
+    baseExperience: 64,
+    height: 9,
+    id: 152,
+    moves: [
+      { name: "tackle", levelLearnedAt: 1 },
+      { name: "growl", levelLearnedAt: 1 },
+      { name: "razor-leaf", levelLearnedAt: 8 },
+      { name: "reflect", levelLearnedAt: 12 },
+      { name: "poison-powder", levelLearnedAt: 15 },
+      { name: "body-slam", levelLearnedAt: 29 },
+      { name: "light-screen", levelLearnedAt: 36 },
+      { name: "solar-beam", levelLearnedAt: 50 },
+    ],
+    name: "chikorita",
+    images: {
+      front: pokemon152,
+      back: back152,
+    },
+    baseStats: {
+      hp: 45,
+      attack: 49,
+      defense: 65,
+      specialAttack: 49,
+      specialDefense: 65,
+      speed: 45,
+    },
+    types: ["grass"],
+    baseCatchRate: 45,
+  },
+  "153": {
+    baseExperience: 141,
+    height: 12,
+    id: 153,
+    moves: [
+      { name: "tackle", levelLearnedAt: 1 },
+      { name: "growl", levelLearnedAt: 1 },
+      { name: "razor-leaf", levelLearnedAt: 1 },
+      { name: "reflect", levelLearnedAt: 18 },
+      { name: "poison-powder", levelLearnedAt: 15 },
+      { name: "body-slam", levelLearnedAt: 31 },
+      { name: "light-screen", levelLearnedAt: 39 },
+      { name: "solar-beam", levelLearnedAt: 55 },
+    ],
+    name: "bayleef",
+    images: {
+      front: pokemon153,
+      back: back153,
+    },
+    baseStats: {
+      hp: 60,
+      attack: 62,
+      defense: 80,
+      specialAttack: 63,
+      specialDefense: 80,
+      speed: 60,
+    },
+    types: ["grass"],
+    baseCatchRate: 45,
+  },
+  "154": {
+    baseExperience: 208,
+    height: 18,
+    id: 154,
+    moves: [
+      { name: "tackle", levelLearnedAt: 1 },
+      { name: "growl", levelLearnedAt: 1 },
+      { name: "razor-leaf", levelLearnedAt: 8 },
+      { name: "reflect", levelLearnedAt: 12 },
+      { name: "poison-powder", levelLearnedAt: 15 },
+      { name: "body-slam", levelLearnedAt: 31 },
+      { name: "light-screen", levelLearnedAt: 41 },
+      { name: "solar-beam", levelLearnedAt: 61 },
+    ],
+    name: "meganium",
+    images: {
+      front: pokemon154,
+      back: back154,
+    },
+    baseStats: {
+      hp: 80,
+      attack: 82,
+      defense: 100,
+      specialAttack: 83,
+      specialDefense: 100,
+      speed: 80,
+    },
+    types: ["grass"],
+    baseCatchRate: 45,
+  },
+  "155": {
+    baseExperience: 65,
+    height: 5,
+    id: 155,
+    moves: [
+      { name: "tackle", levelLearnedAt: 1 },
+      { name: "leer", levelLearnedAt: 1 },
+      { name: "smoke-screen", levelLearnedAt: 6 },
+      { name: "ember", levelLearnedAt: 12 },
+      { name: "quick-attack", levelLearnedAt: 19 },
+      { name: "swift", levelLearnedAt: 36 },
+      { name: "flamethrower", levelLearnedAt: 46 },
+    ],
+    name: "cyndaquil",
+    images: {
+      front: pokemon155,
+      back: back155,
+    },
+    baseStats: {
+      hp: 39,
+      attack: 52,
+      defense: 43,
+      specialAttack: 60,
+      specialDefense: 50,
+      speed: 65,
+    },
+    types: ["fire"],
+    baseCatchRate: 45,
+  },
+  "156": {
+    baseExperience: 142,
+    height: 9,
+    id: 156,
+    moves: [
+      { name: "tackle", levelLearnedAt: 1 },
+      { name: "leer", levelLearnedAt: 1 },
+      { name: "smoke-screen", levelLearnedAt: 6 },
+      { name: "ember", levelLearnedAt: 12 },
+      { name: "quick-attack", levelLearnedAt: 21 },
+      { name: "swift", levelLearnedAt: 42 },
+      { name: "flamethrower", levelLearnedAt: 54 },
+    ],
+    name: "quilava",
+    images: {
+      front: pokemon156,
+      back: back156,
+    },
+    baseStats: {
+      hp: 58,
+      attack: 64,
+      defense: 58,
+      specialAttack: 80,
+      specialDefense: 65,
+      speed: 80,
+    },
+    types: ["fire"],
+    baseCatchRate: 45,
+  },
+  "157": {
+    baseExperience: 209,
+    height: 17,
+    id: 157,
+    moves: [
+      { name: "tackle", levelLearnedAt: 1 },
+      { name: "leer", levelLearnedAt: 1 },
+      { name: "smoke-screen", levelLearnedAt: 6 },
+      { name: "ember", levelLearnedAt: 12 },
+      { name: "quick-attack", levelLearnedAt: 21 },
+      { name: "swift", levelLearnedAt: 45 },
+      { name: "flamethrower", levelLearnedAt: 60 },
+    ],
+    name: "typhlosion",
+    images: {
+      front: pokemon157,
+      back: back157,
+    },
+    baseStats: {
+      hp: 78,
+      attack: 84,
+      defense: 78,
+      specialAttack: 109,
+      specialDefense: 85,
+      speed: 100,
+    },
+    types: ["fire"],
+    baseCatchRate: 45,
+  },
+  "158": {
+    baseExperience: 66,
+    height: 6,
+    id: 158,
+    moves: [
+      { name: "scratch", levelLearnedAt: 1 },
+      { name: "leer", levelLearnedAt: 1 },
+      { name: "rage", levelLearnedAt: 7 },
+      { name: "water-gun", levelLearnedAt: 13 },
+      { name: "slash", levelLearnedAt: 35 },
+      { name: "screech", levelLearnedAt: 43 },
+      { name: "hydro-pump", levelLearnedAt: 52 },
+    ],
+    name: "totodile",
+    images: {
+      front: pokemon158,
+      back: back158,
+    },
+    baseStats: {
+      hp: 50,
+      attack: 65,
+      defense: 64,
+      specialAttack: 44,
+      specialDefense: 48,
+      speed: 43,
+    },
+    types: ["water"],
+    baseCatchRate: 45,
+  },
+  "159": {
+    baseExperience: 143,
+    height: 11,
+    id: 159,
+    moves: [
+      { name: "scratch", levelLearnedAt: 1 },
+      { name: "leer", levelLearnedAt: 1 },
+      { name: "rage", levelLearnedAt: 7 },
+      { name: "water-gun", levelLearnedAt: 13 },
+      { name: "slash", levelLearnedAt: 37 },
+      { name: "screech", levelLearnedAt: 45 },
+      { name: "hydro-pump", levelLearnedAt: 55 },
+    ],
+    name: "crocomaw",
+    images: {
+      front: pokemon159,
+      back: back159,
+    },
+    baseStats: {
+      hp: 65,
+      attack: 80,
+      defense: 80,
+      specialAttack: 59,
+      specialDefense: 63,
+      speed: 58,
+    },
+    types: ["water"],
+    baseCatchRate: 45,
+  },
+  "160": {
+    baseExperience: 210,
+    height: 23,
+    id: 160,
+    moves: [
+      { name: "scratch", levelLearnedAt: 1 },
+      { name: "leer", levelLearnedAt: 1 },
+      { name: "rage", levelLearnedAt: 7 },
+      { name: "water-gun", levelLearnedAt: 13 },
+      { name: "slash", levelLearnedAt: 38 },
+      { name: "screech", levelLearnedAt: 47 },
+      { name: "hydro-pump", levelLearnedAt: 58 },
+    ],
+    name: "feraligatr",
+    images: {
+      front: pokemon160,
+      back: back160,
+    },
+    baseStats: {
+      hp: 85,
+      attack: 105,
+      defense: 100,
+      specialAttack: 79,
+      specialDefense: 83,
+      speed: 78,
+    },
+    types: ["water"],
+    baseCatchRate: 45,
+  },
+  "161": {
+    baseExperience: 57,
+    height: 8,
+    id: 161,
+    moves: [
+      { name: "tackle", levelLearnedAt: 1 },
+      { name: "defense-curl", levelLearnedAt: 5 },
+      { name: "quick-attack", levelLearnedAt: 11 },
+      { name: "fury-swipes", levelLearnedAt: 17 },
+      { name: "slam", levelLearnedAt: 25 },
+      { name: "rest", levelLearnedAt: 33 },
+      { name: "amnesia", levelLearnedAt: 41 },
+    ],
+    name: "sentret",
+    images: {
+      front: pokemon161,
+      back: back161,
+    },
+    baseStats: {
+      hp: 35,
+      attack: 46,
+      defense: 34,
+      specialAttack: 35,
+      specialDefense: 45,
+      speed: 20,
+    },
+    types: ["normal"],
+    baseCatchRate: 255,
+  },
+  "162": {
+    baseExperience: 116,
+    height: 18,
+    id: 162,
+    moves: [
+      { name: "scratch", levelLearnedAt: 1 },
+      { name: "defense-curl", levelLearnedAt: 5 },
+      { name: "quick-attack", levelLearnedAt: 11 },
+      { name: "fury-swipes", levelLearnedAt: 18 },
+      { name: "slam", levelLearnedAt: 28 },
+      { name: "rest", levelLearnedAt: 38 },
+      { name: "amnesia", levelLearnedAt: 48 },
+    ],
+    name: "furret",
+    images: {
+      front: pokemon162,
+      back: back162,
+    },
+    baseStats: {
+      hp: 85,
+      attack: 76,
+      defense: 64,
+      specialAttack: 45,
+      specialDefense: 55,
+      speed: 90,
+    },
+    types: ["normal"],
+    baseCatchRate: 90,
+  },
+  "163": {
+    baseExperience: 58,
+    height: 7,
+    id: 163,
+    moves: [
+      { name: "tackle", levelLearnedAt: 1 },
+      { name: "growl", levelLearnedAt: 1 },
+      { name: "peck", levelLearnedAt: 11 },
+      { name: "hypnosis", levelLearnedAt: 16 },
+      { name: "reflect", levelLearnedAt: 22 },
+      { name: "take-down", levelLearnedAt: 28 },
+      { name: "confusion", levelLearnedAt: 34 },
+      { name: "dream-eater", levelLearnedAt: 48 },
+    ],
+    name: "hoothoot",
+    images: {
+      front: pokemon163,
+      back: back163,
+    },
+    baseStats: {
+      hp: 60,
+      attack: 30,
+      defense: 30,
+      specialAttack: 36,
+      specialDefense: 56,
+      speed: 50,
+    },
+    types: ["normal", "flying"],
+    baseCatchRate: 255,
+  },
+  "164": {
+    baseExperience: 162,
+    height: 16,
+    id: 164,
+    moves: [
+      { name: "tackle", levelLearnedAt: 1 },
+      { name: "growl", levelLearnedAt: 1 },
+      { name: "peck", levelLearnedAt: 11 },
+      { name: "reflect", levelLearnedAt: 25 },
+      { name: "hypnosis", levelLearnedAt: 16 },
+      { name: "take-down", levelLearnedAt: 33 },
+      { name: "confusion", levelLearnedAt: 41 },
+      { name: "dream-eater", levelLearnedAt: 57 },
+    ],
+    name: "noctowl",
+    images: {
+      front: pokemon164,
+      back: back164,
+    },
+    baseStats: {
+      hp: 100,
+      attack: 50,
+      defense: 50,
+      specialAttack: 76,
+      specialDefense: 96,
+      speed: 70,
+    },
+    types: ["normal", "flying"],
+    baseCatchRate: 90,
   },
 };
 

@@ -602,5 +602,57 @@
   {
     "name": "mew",
     "url": "https://pokeapi.co/api/v2/pokemon/151/"
+  },
+  {
+    "name": "chikorita",
+    "url": "https://pokeapi.co/api/v2/pokemon/152/"
+  },
+  {
+    "name": "bayleef",
+    "url": "https://pokeapi.co/api/v2/pokemon/153/"
+  },
+  {
+    "name": "maganium",
+    "url": "https://pokeapi.co/api/v2/pokemon/154/"
+  },
+  {
+    "name": "cyndaquil",
+    "url": "https://pokeapi.co/api/v2/pokemon/155/"
+  },
+  {
+    "name": "quilava",
+    "url": "https://pokeapi.co/api/v2/pokemon/156/"
+  },
+  {
+    "name": "typhlosion",
+    "url": "https://pokeapi.co/api/v2/pokemon/157/"
+  },
+  {
+    "name": "totodile",
+    "url": "https://pokeapi.co/api/v2/pokemon/158/"
+  },
+  {
+    "name": "crocomaw",
+    "url": "https://pokeapi.co/api/v2/pokemon/159/"
+  },
+  {
+    "name": "feraligatr",
+    "url": "https://pokeapi.co/api/v2/pokemon/160/"
+  },
+  {
+    "name": "sentret",
+    "url": "https://pokeapi.co/api/v2/pokemon/161/"
+  },
+  {
+    "name": "furret",
+    "url": "https://pokeapi.co/api/v2/pokemon/162/"
+  },
+  {
+    "name": "hoothoot",
+    "url": "https://pokeapi.co/api/v2/pokemon/163/"
+  },
+  {
+    "name": "noctowl",
+    "url": "https://pokeapi.co/api/v2/pokemon/164/"
   }
 ]

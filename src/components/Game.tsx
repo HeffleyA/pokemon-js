@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { selectPos, selectMap } from "../state/gameSlice";
 import Character from "./Character";
 import Text from "./Text";
@@ -90,7 +91,7 @@ const NightOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: var(--bg);
+  background-color: rgb(0, 0, 0);
   mix-blend-mode: darken;
   opacity: 0.5;
 `;
@@ -99,7 +100,14 @@ const Game = () => {
   const pos = useSelector(selectPos);
   const map = useSelector(selectMap);
 
-  var isNight = false;
+  const [isNight, setIsNight] = useState(false);
+
+  useEffect(()=>{
+    const timer = setTimeout(() => {
+        setIsNight(!isNight);
+      }, 60000); // Toggle every 60 seconds
+      return () => clearTimeout(timer);
+  });
 
   return (
     <Container>
@@ -124,9 +132,6 @@ const Game = () => {
       </StyledGame>
 
       <ColorOverlay />
-      {setInterval(() => {
-        isNight = !isNight;
-      }, 480000)}
       <div>
         {isNight ? (
           <NightOverlay />

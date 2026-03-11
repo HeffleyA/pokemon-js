@@ -678,7 +678,7 @@ const PokemonEncounter = () => {
         encounterPokemon(getPokemonEncounter(newPokemon.id, newPokemon.level))
       );
       setTrainerPokemonIndex(newIndex);
-      console.log("Throwing pokeball at enemy");
+      console.log("Hrowing pokeball at enemy");
       throwPokeballAtEnemy(49);
       return;
     }

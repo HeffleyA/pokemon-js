@@ -54,7 +54,6 @@ export interface GameState {
   pokemon: PokemonInstance[];
   pc: PokemonInstance[];
   activePokemonIndex: number;
-  doubleActivePokemonIndex: number;
   trainerEncounter?: TrainerType;
   pokemonEncounter?: PokemonEncounterType;
   doublePokemonEncounter?: DoublePokemonEncounterType;

@@ -5,20 +5,16 @@ import {
   addPokemon,
   defeatTrainer,
   encounterPokemon,
-  doubleEncounterPokemon,
   endEncounter,
   faintToTrainer,
   gainMoney,
   recoverFromFainting,
   resetActivePokemon,
-  resetDoubleActivePokemon,
   selectActivePokemon,
-  selectDoubleActivePokemon,
   selectActivePokemonIndex,
   selectName,
   selectPokemon,
   selectPokemonEncounter,
-  selectDoublePokemonEncounter,
   selectTrainerEncounter,
   setActivePokemon,
   updatePokemon,
@@ -83,7 +79,7 @@ const StyledPokemonEncounter = styled.div`
   background: var(--bg);
   padding-top: 1.5vh;
   display: flex;
-  flex-direction: column, row;
+  flex-direction: column;
   width: 100%;
 
   height: 80%;
@@ -96,13 +92,6 @@ const StyledPokemonEncounter = styled.div`
 const Row = styled.div`
   display: flex;
   width: 100%;
-  justify-content: space-between;
-  flex: 1;
-`;
-
-const Column = styled.div`
-  display: flex;
-  height: 100%;
   justify-content: space-between;
   flex: 1;
 `;
@@ -551,15 +540,9 @@ const PokemonEncounter = () => {
   const enemy = useSelector(selectPokemonEncounter);
   const enemyMetadata = usePokemonMetadata(enemy?.id || null);
   const enemyStats = usePokemonStats(enemy?.id || 1, enemy?.level || 1);
-  const enemy2 = useSelector(selectDoublePokemonEncounter);
-  const enemy2Metadata = usePokemonMetadata(enemy2?.id || null);
-  const enemy2Stats = usePokemonStats(enemy2?.id || 1, enemy2?.level || 1);
   const active = useSelector(selectActivePokemon);
   const activeMetadata = usePokemonMetadata(active?.id || null);
   const activeStats = usePokemonStats(active?.id || 1, active?.level || 1);
-  const active2 = useSelector(selectDoubleActivePokemon);
-  const active2Metadata = usePokemonMetadata(active2?.id || null);
-  const active2Stats = usePokemonStats(active2?.id || 1, active2?.level || 1);
   const itemMenuOpen = useSelector(selectItemsMenu);
   const isMobile = useIsMobile();
   const pokemon = useSelector(selectPokemon);
@@ -567,7 +550,6 @@ const PokemonEncounter = () => {
   const startMenuOpen = useSelector(selectStartMenu);
   const pokeballThrowing = useSelector(selectPokeballThrowing);
   const trainer = useSelector(selectTrainerEncounter);
-  const doubleBattle = useSelector(selectDoubleBattle);
   const activePokemonIndex = useSelector(selectActivePokemonIndex);
 
   // 0 = intro animation started
@@ -623,7 +605,6 @@ const PokemonEncounter = () => {
   // 52 = receiving money
   const [stage, setStage] = useState(-1);
   const [trainerPokemonIndex, setTrainerPokemonIndex] = useState(0);
-  const [trainerSecondPokemonIndex, setTrainerSecondPokemonIndex] = useState(0);
   const [outroIndex, setOutroIndex] = useState(0);
   const [involvedPokemon, setInvolvedPokemon] = useState<number[]>([0]);
   const [processingInvolvedPokemon, setProcessingInvolvedPokemon] = useState(0);
@@ -635,9 +616,7 @@ const PokemonEncounter = () => {
   const [alertText, setAlertText] = useState<string | null>(null);
   const [clickableNotice, setClickableNotice] = useState<string | null>(null);
 
-  const isDoubleBattle = !!doubleBattle;
-  const isInBattle = !!enemy!! && !!active && !!enemyMetadata && !!activeMetadata &&
-    isDoubleBattle ? (!!enemy2!! && !!active2 && !!enemy2Metadata && !!active2Metadata) : !isDoubleBattle;
+  const isInBattle = !!enemy && !!active && !!enemyMetadata && !!activeMetadata;
 
   const isTrainer = !!trainer;
   const isThrowingEnemyPokeball = stage >= 34 && stage <= 38 && isTrainer;
@@ -695,17 +674,9 @@ const PokemonEncounter = () => {
     if (isTrainer && trainerPokemonIndex < trainer?.pokemon.length - 1) {
       const newIndex = trainerPokemonIndex + 1;
       const newPokemon = trainer?.pokemon[newIndex];
-      if (isDoubleBattle && trainerPokemonIndex < trainer?.pokemon.length - 2) {
-        const newPokemon2 = trainer?.pokemon[newIndex + 1];
-        dispatch(
-          doubleEncounterPokemon(getPokemonEncounter(newPokemon.id, newPokemon.level), getPokemonEncounter(newPokemon2.id, newPokemon2.level))
-        )
-      }
-      else {
-        dispatch(
-          encounterPokemon(getPokemonEncounter(newPokemon.id, newPokemon.level))
-        );
-      }
+      dispatch(
+        encounterPokemon(getPokemonEncounter(newPokemon.id, newPokemon.level))
+      );
       setTrainerPokemonIndex(newIndex);
       console.log("Throwing pokeball at enemy");
       throwPokeballAtEnemy(49);
@@ -755,7 +726,6 @@ const PokemonEncounter = () => {
   useEffect(() => {
     if (isInBattle) {
       dispatch(resetActivePokemon());
-      dispatch(resetDoubleActivePokemon());
       setStage(0);
       setTimeout(() => {
         setStage(1);
@@ -1044,20 +1014,6 @@ const PokemonEncounter = () => {
           hp: enemyStats.hp,
         })
       );
-      dispatch(
-        addPokemon({
-          id: enemy2.id,
-          level: enemy2.level,
-          xp: 0,
-          moves: enemy2.moves.map((move) => {
-            return {
-              id: move,
-              pp: getMoveMetadata(move).pp || 0,
-            };
-          }),
-          hp: enemy2Stats.hp,
-        })
-      );
       endEncounter_();
     }
 
@@ -1105,8 +1061,9 @@ const PokemonEncounter = () => {
     }
     if (stage === 22) {
       if (!processingMetadata) throw new Error("No processing metadata found");
-      return `${processingMetadata.name.toUpperCase()} grew to level ${getLevelData(processingPokemon.level, processingPokemon.xp).level
-        }!`;
+      return `${processingMetadata.name.toUpperCase()} grew to level ${
+        getLevelData(processingPokemon.level, processingPokemon.xp).level
+      }!`;
     }
     if (stage === 24) return `${activeMetadata.name.toUpperCase()} fainted!`;
     if (stage === 26) return `${name} is out of usable POKéMON!`;
@@ -1121,8 +1078,9 @@ const PokemonEncounter = () => {
       if (!processingMetadata) throw new Error("No processing metadata found");
       const move = getLearnedMove(processingPokemon);
       if (!move) throw new Error("No move found");
-      return `${processingMetadata.name.toUpperCase()} is trying to learn ${move.id
-        }.`;
+      return `${processingMetadata.name.toUpperCase()} is trying to learn ${
+        move.id
+      }.`;
     }
     if (stage === 31) return `But it cannot learn more than 4 moves`;
     if (stage === 32) return `Choose a move you would like to forget`;
@@ -1149,10 +1107,6 @@ const PokemonEncounter = () => {
     return enemy.moves[Math.floor(Math.random() * enemy.moves.length)];
   };
 
-  const getRandomEnemy2Move = () => {
-    return enemy2.moves[Math.floor(Math.random() * enemy2.moves.length)];
-  };
-
   const getActiveMovesFirst = (
     activeMove: MoveMetadata,
     enemyMove: MoveMetadata
@@ -1160,17 +1114,6 @@ const PokemonEncounter = () => {
     if (activeMove.priority > enemyMove.priority) return true;
     if (activeMove.priority < enemyMove.priority) return false;
     return activeStats.speed > enemyStats.speed;
-  };
-
-  const getDoubleActiveMovesFirst = (
-    activeMove: MoveMetadata,
-    active2Move: MoveMetadata,
-    enemyMove: MoveMetadata,
-    enemy2Move: MoveMetadata
-  ) => {
-    if (activeMove.priority + active2Move.priority > enemyMove.priority + enemy2Move.priority) return true;
-    if (activeMove.priority + active2Move.priority < enemyMove.priority + enemy2Move.priority) return false;
-    return activeStats.speed + active2Stats.speed > enemyStats.speed + enemy2Stats.speed;
   };
 
   const processMoveResult = (
@@ -1246,19 +1189,11 @@ const PokemonEncounter = () => {
     return { us, them };
   };
 
-  const processBattle = (attackId: string, attack2Id: string = "") => {
+  const processBattle = (attackId: string) => {
     const activeMove = getMoveMetadata(attackId);
     const enemyMove = getMoveMetadata(getRandomEnemyMove());
 
-    var activeMovesFirst;
-    if (doubleBattle) {
-      const active2Move = getMoveMetadata(attack2Id);
-      const enemy2Move = getMoveMetadata(getRandomEnemy2Move());
-
-      activeMovesFirst = getDoubleActiveMovesFirst(activeMove, active2Move, enemyMove, enemy2Move);
-    } else {
-      activeMovesFirst = getActiveMovesFirst(activeMove, enemyMove);
-    }
+    const activeMovesFirst = getActiveMovesFirst(activeMove, enemyMove);
 
     // We are moving first
     if (activeMovesFirst) {
@@ -1374,130 +1309,73 @@ const PokemonEncounter = () => {
       {stage >= 1 && (
         <>
           <StyledPokemonEncounter>
-            <Column>
-              <Row
-                style={{ opacity: [20, 21, 22, 50].includes(stage) ? "0" : "1" }}
+            <Row
+              style={{ opacity: [20, 21, 22, 50].includes(stage) ? "0" : "1" }}
+            >
+              <LeftInfoSection
+                style={{
+                  opacity:
+                    stage >= 3 &&
+                    ![46, 51, 52].includes(stage) &&
+                    !isThrowingEnemyPokeball
+                      ? "1"
+                      : "0",
+                }}
               >
-                <LeftInfoSection
-                  style={{
-                    opacity:
-                      stage >= 3 &&
-                        ![46, 51, 52].includes(stage) &&
-                        !isThrowingEnemyPokeball
-                        ? "1"
-                        : "0",
-                  }}
-                >
-                  <Name>{enemyMetadata.name}</Name>
-                  <Level>{`:L${enemy.level}`}</Level>
-                  <HealthBarContainer>
-                    <HealthBar
-                      big
-                      currentHealth={enemy.hp}
-                      maxHealth={enemyStats.hp}
-                    />
-                  </HealthBarContainer>
-                  <Corner src={corner} />
-                </LeftInfoSection>
-              </Row>
-              <Row
-                style={{ opacity: [24, 26, 27, 28].includes(stage) ? "0" : "1" }}
+                <Name>{enemyMetadata.name}</Name>
+                <Level>{`:L${enemy.level}`}</Level>
+                <HealthBarContainer>
+                  <HealthBar
+                    big
+                    currentHealth={enemy.hp}
+                    maxHealth={enemyStats.hp}
+                  />
+                </HealthBarContainer>
+                <Corner src={corner} />
+              </LeftInfoSection>
+              <ImageContainer $flashing={stage === 17}>
+                <AttackRight $attacking={stage === 18}>
+                  <ChangeEnemyPokemon $changing={[46].includes(stage)}>
+                    <RightImage src={rightImage()} />
+                  </ChangeEnemyPokemon>
+                </AttackRight>
+              </ImageContainer>
+            </Row>
+            <Row
+              style={{ opacity: [24, 26, 27, 28].includes(stage) ? "0" : "1" }}
+            >
+              <ImageContainer $flashing={stage === 19}>
+                <AttackLeft $attacking={stage === 15}>
+                  <ChangePokemon $changing={[3, 25].includes(stage)}>
+                    <LeftImage src={leftImage()} />
+                  </ChangePokemon>
+                </AttackLeft>
+              </ImageContainer>
+              <RightInfoSection
+                style={{
+                  opacity:
+                    stage >= 11 &&
+                    ![46, 48].includes(stage) &&
+                    !isThrowingEnemyPokeball
+                      ? "1"
+                      : "0",
+                }}
               >
-                <ImageContainer $flashing={stage === 19}>
-                  <AttackLeft $attacking={stage === 15}>
-                    <ChangePokemon $changing={[3, 25].includes(stage)}>
-                      <LeftImage src={leftImage()} />
-                    </ChangePokemon>
-                  </AttackLeft>
-                </ImageContainer>
-                <RightInfoSection
-                  style={{
-                    opacity:
-                      stage >= 11 &&
-                        ![46, 48].includes(stage) &&
-                        !isThrowingEnemyPokeball
-                        ? "1"
-                        : "0",
-                  }}
-                >
-                  <Name>{activeMetadata.name}</Name>
-                  <Level>{`:L${active.level}`}</Level>
-                  <HealthBarContainer>
-                    <HealthBar
-                      big
-                      currentHealth={active.hp}
-                      maxHealth={activeStats.hp}
-                    />
-                  </HealthBarContainer>
-                  <Health>{`${active.hp}/${activeStats.hp}`}</Health>
-                  <CornerContainer>
-                    <CornerRight src={corner} />
-                  </CornerContainer>
-                </RightInfoSection>
-              </Row>
-            </Column>
-            <Column>
-              <Row
-                style={{ opacity: [20, 21, 22, 50].includes(stage) ? "0" : "1" }}
-              >
-                <LeftInfoSection
-                  style={{
-                    opacity:
-                      stage >= 3 &&
-                        ![46, 51, 52].includes(stage) &&
-                        !isThrowingEnemyPokeball
-                        ? "1"
-                        : "0",
-                  }}
-                >
-                  <Name>{enemy2Metadata.name}</Name>
-                  <Level>{`:L${enemy2.level}`}</Level>
-                  <HealthBarContainer>
-                    <HealthBar
-                      big
-                      currentHealth={enemy2.hp}
-                      maxHealth={enemy2Stats.hp}
-                    />
-                  </HealthBarContainer>
-                  <Corner src={corner} />
-                </LeftInfoSection>
-                <ImageContainer $flashing={stage === 17}>
-                  <AttackRight $attacking={stage === 18}>
-                    <ChangeEnemyPokemon $changing={[46].includes(stage)}>
-                      <RightImage src={rightImage()} />
-                    </ChangeEnemyPokemon>
-                  </AttackRight>
-                </ImageContainer>
-              </Row>
-              <Row
-                style={{ opacity: [24, 26, 27, 28].includes(stage) ? "0" : "1" }}
-              >
-                <RightInfoSection
-                  style={{
-                    opacity:
-                      stage >= 11 &&
-                        ![46, 48].includes(stage) &&
-                        !isThrowingEnemyPokeball
-                        ? "1"
-                        : "0",
-                  }}
-                >
-                  <Name>{active2Metadata.name}</Name>
-                  <Level>{`:L${active2.level}`}</Level>
-                  <HealthBarContainer>
-                    <HealthBar
-                      big
-                      currentHealth={active2.hp}
-                      maxHealth={active2Stats.hp}
-                    />
-                  </HealthBarContainer>
-                  <Health>{`${active2.hp}/${active2Stats.hp}`}</Health>
-                  <CornerContainer>
-                    <CornerRight src={corner} />
-                  </CornerContainer>
-                </RightInfoSection>
-              </Row>
-            </Column>
+                <Name>{activeMetadata.name}</Name>
+                <Level>{`:L${active.level}`}</Level>
+                <HealthBarContainer>
+                  <HealthBar
+                    big
+                    currentHealth={active.hp}
+                    maxHealth={activeStats.hp}
+                  />
+                </HealthBarContainer>
+                <Health>{`${active.hp}/${activeStats.hp}`}</Health>
+                <CornerContainer>
+                  <CornerRight src={corner} />
+                </CornerContainer>
+              </RightInfoSection>
+            </Row>
           </StyledPokemonEncounter>
           <TextContainer>
             <Frame
@@ -1543,7 +1421,7 @@ const PokemonEncounter = () => {
               },
             ]}
             noExit
-            close={() => { }}
+            close={() => {}}
             bottom="0"
             right="0"
           />
@@ -1565,7 +1443,7 @@ const PokemonEncounter = () => {
           {stage === 25 && (
             <PokemonList
               text="Bring out which POKéMON?"
-              close={() => { }}
+              close={() => {}}
               switchAction={(index) => {
                 if (pokemon[index].hp <= 0) return;
                 dispatch(setActivePokemon(index));
@@ -1585,7 +1463,7 @@ const PokemonEncounter = () => {
                 if (!newMove)
                   return {
                     label: "Error",
-                    action: () => { },
+                    action: () => {},
                   };
                 const item: MenuItemType = {
                   label: m.id,

@@ -65,7 +65,7 @@ interface BackgroundProps {
   height: number;
 }
 
-const Background = styled(PixelImage)<BackgroundProps>`
+const Background = styled(PixelImage) <BackgroundProps>`
   position: absolute;
   top: 0;
   left: 0;
@@ -84,9 +84,22 @@ const ColorOverlay = styled.div`
   opacity: 0.5;
 `;
 
+const NightOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+  mix-blend-mode: darken;
+  opacity: 0.5;
+`;
+
 const Game = () => {
   const pos = useSelector(selectPos);
   const map = useSelector(selectMap);
+
+  var isNight = false;
 
   return (
     <Container>
@@ -111,6 +124,16 @@ const Game = () => {
       </StyledGame>
 
       <ColorOverlay />
+      {setInterval(() => {
+        isNight = !isNight;
+      }, 480000)}
+      <div>
+        {isNight ? (
+          <NightOverlay />
+        ) : (
+          <></>
+        )}
+      </div>
       <TrainerEncounter />
       <PokemonEncounter />
       <Text />

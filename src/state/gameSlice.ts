@@ -65,6 +65,36 @@ const initialState: GameState = {
         { id: "tail-whip", pp: 30 },
       ],
     },
+    {
+      id: 152,
+      level: 5,
+      xp: 0,
+      hp: 20,
+      moves: [
+        { id: "tackle", pp: 35 },
+        { id: "growl", pp: 40 },
+      ],
+    },
+    {
+      id: 155,
+      level: 5,
+      xp: 0,
+      hp: 19,
+      moves: [
+        { id: "tackle", pp: 35 },
+        { id: "leer", pp: 40 },
+      ],
+    },
+    {
+      id: 158,
+      level: 5,
+      xp: 0,
+      hp: 20,
+      moves: [
+        { id: "scratch", pp: 35 },
+        { id: "leer", pp: 40 },
+      ],
+    }
   ],
   pc: [
     {
@@ -77,6 +107,95 @@ const initialState: GameState = {
         { id: "growl", pp: 40 },
       ],
     },
+    {
+      id: 153,
+      level: 16,
+      xp: 0,
+      hp: 45,
+      moves: [
+        { id: "tackle", pp: 35 },
+        { id: "growl", pp: 40 },
+        { id: "razor-leaf", pp: 25 },
+      ],
+    },
+    {
+      id: 154,
+      level: 32,
+      xp: 0,
+      hp: 93,
+      moves: [
+        { id: "tackle", pp: 35 },
+        { id: "growl", pp: 40 },
+        { id: "razor-leaf", pp: 25 },
+        { id: "reflect", pp: 20 },
+      ],
+    },
+    {
+      id: 156,
+      level: 16,
+      xp: 0,
+      hp: 45,
+      moves: [
+        { id: "tackle", pp: 35 },
+        { id: "leer", pp: 40 },
+        { id: "smokescreen", pp: 20 },
+      ],
+    },
+    {
+      id: 157,
+      level: 32,
+      xp: 0,
+      hp: 92,
+      moves: [
+        { id: "tackle", pp: 35 },
+        { id: "leer", pp: 40 },
+        { id: "smokescreen", pp: 20 },
+        { id: "ember", pp: 25 },
+      ],
+    },
+    {
+      id: 159,
+      level: 16,
+      xp: 0,
+      hp: 47,
+      moves: [
+        { id: "scratch", pp: 35 },
+        { id: "leer", pp: 40 },
+        { id: "rage", pp: 20 },
+      ],
+    },
+    {
+      id: 160,
+      level: 32,
+      xp: 0,
+      hp: 96,
+      moves: [
+        { id: "scratch", pp: 35 },
+        { id: "leer", pp: 40 },
+        { id: "rage", pp: 20 },
+        { id: "water-gun", pp: 25 },
+      ],
+    },
+    {
+      id: 162,
+      level: 15,
+      xp: 0,
+      hp: 51,
+      moves: [
+        { id: "scratch", pp: 35 },
+        { id: "defense-curl", pp: 40 },
+      ],
+    },
+    {
+      id: 164,
+      level: 20,
+      xp: 0,
+      hp: 70,
+      moves: [
+        { id: "tackle", pp: 35 },
+        { id: "growl", pp: 40 },
+      ],
+    }
   ],
   activePokemonIndex: 0,
   trainerEncounter: undefined,

@@ -105,7 +105,7 @@ const Game = () => {
   useEffect(()=>{
     const timer = setTimeout(() => {
         setIsNight(!isNight);
-      }, 1000)
+      }, 60000); // Toggle every 60 seconds
       return () => clearTimeout(timer);
   });
 

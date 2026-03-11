@@ -1,0 +1,159 @@
+          kanto-route-1-area:
+          {
+            "id": 16,
+            "chance": 20,
+            "conditionValues": [],
+            "maxLevel": 3,
+            "minLevel": 3
+          },
+          {
+            "id": 16,
+            "chance": 10,
+            "conditionValues": [],
+            "maxLevel": 2,
+            "minLevel": 2
+          },
+          {
+            "id": 16,
+            "chance": 10,
+            "conditionValues": [],
+            "maxLevel": 3,
+            "minLevel": 3
+          },
+          {
+            "id": 16,
+            "chance": 5,
+            "conditionValues": [],
+            "maxLevel": 3,
+            "minLevel": 3
+          },
+          {
+            "id": 16,
+            "chance": 4,
+            "conditionValues": [],
+            "maxLevel": 4,
+            "minLevel": 4
+          },
+          {
+            "id": 16,
+            "chance": 1,
+            "conditionValues": [],
+            "maxLevel": 5,
+            "minLevel": 5
+          },
+          {
+            "id": 19,
+            "chance": 20,
+            "conditionValues": [],
+            "maxLevel": 3,
+            "minLevel": 3
+          },
+          {
+            "id": 19,
+            "chance": 15,
+            "conditionValues": [],
+            "maxLevel": 3,
+            "minLevel": 3
+          },
+          {
+            "id": 19,
+            "chance": 10,
+            "conditionValues": [],
+            "maxLevel": 2,
+            "minLevel": 2
+          },
+          {
+            "id": 19,
+            "chance": 5,
+            "conditionValues": [],
+            "maxLevel": 4,
+            "minLevel": 4
+          }
+
+
+
+
+          {
+            "id": 16,
+            "chance": 20,
+            "conditionValues": [],
+            "maxLevel": 3,
+            "minLevel": 3
+          },
+          {
+            "id": 16,
+            "chance": 4,
+            "conditionValues": [],
+            "maxLevel": 4,
+            "minLevel": 4
+          },
+          {
+            "id": 16,
+            "chance": 1,
+            "conditionValues": [],
+            "maxLevel": 5,
+            "minLevel": 5
+          },
+          {
+            "id": 19,
+            "chance": 20,
+            "conditionValues": [],
+            "maxLevel": 3,
+            "minLevel": 3
+          },
+          {
+            "id": 19,
+            "chance": 4,
+            "conditionValues": [],
+            "maxLevel": 4,
+            "minLevel": 4
+          },
+          {
+            "id": 19,
+            "chance": 1,
+            "conditionValues": [],
+            "maxLevel": 5,
+            "minLevel": 5
+          },
+          {
+            "id": 161,
+            "chance": 20,
+            "conditionValues": [],
+            "maxLevel": 3,
+            "minLevel": 3
+          },
+          {
+            "id": 161,
+            "chance": 4,
+            "conditionValues": [],
+            "maxLevel": 4,
+            "minLevel": 4
+          },
+          {
+            "id": 161,
+            "chance": 1,
+            "conditionValues": [],
+            "maxLevel": 5,
+            "minLevel": 5
+          },
+          {
+            "id": 163,
+            "chance": 20,
+            "conditionValues": [],
+            "maxLevel": 3,
+            "minLevel": 3
+          },
+          {
+            "id": 163,
+            "chance": 4,
+            "conditionValues": [],
+            "maxLevel": 4,
+            "minLevel": 4
+          },
+          {
+            "id": 163,
+            "chance": 1,
+            "conditionValues": [],
+            "maxLevel": 5,
+            "minLevel": 5
+          }

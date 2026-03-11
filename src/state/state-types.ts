@@ -38,6 +38,11 @@ export interface PokemonEncounterType {
   moves: string[];
 }
 
+export interface DoublePokemonEncounterType {
+  pokemon1: PokemonEncounterType;
+  pokemon2: PokemonEncounterType;
+}
+
 export interface GameState {
   pos: PosType;
   jumping: boolean;
@@ -51,6 +56,7 @@ export interface GameState {
   activePokemonIndex: number;
   trainerEncounter?: TrainerType;
   pokemonEncounter?: PokemonEncounterType;
+  doublePokemonEncounter?: DoublePokemonEncounterType;
   money: number;
   defeatedTrainers: string[];
   collectedItems: string[];

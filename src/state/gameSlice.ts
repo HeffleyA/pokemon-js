@@ -414,9 +414,6 @@ export const selectPokemon = (state: RootState) => state.game.pokemon;
 export const selectPokemonEncounter = (state: RootState) =>
   state.game.pokemonEncounter;
 
-export const selectDoublePokemonEncounter = (state: RootState) =>
-  state.game.doublePokemonEncounter;
-
 export const selectActivePokemon = (state: RootState) =>
   state.game.pokemon[state.game.activePokemonIndex];
 

@@ -12,7 +12,6 @@ import {
   GameState,
   InventoryItemType,
   PokemonEncounterType,
-  DoublePokemonEncounterType,
   PokemonInstance,
   PosType,
 } from "./state-types";
@@ -80,7 +79,6 @@ const initialState: GameState = {
     },
   ],
   activePokemonIndex: 0,
-  //doubleActivePokemonIndex: 1,
   trainerEncounter: undefined,
   defeatedTrainers: [],
   collectedItems: [],
@@ -208,10 +206,7 @@ export const gameSlice = createSlice({
       state.name = savedGameState.name;
       state.pokemon = savedGameState.pokemon;
       state.pokemonEncounter = savedGameState.pokemonEncounter;
-      state.pokemonDoubleEncounter = savedGameState.doublePokemonEncounter;
-      state.doubleBattle = savedGameState.doubleBattle;
       state.activePokemonIndex = savedGameState.activePokemonIndex;
-      state.activeDoublePokemonIndex = savedGameState.doubleActivePokemonIndex;
       state.money = savedGameState.money;
       state.pc = savedGameState.pc;
       state.trainerEncounter = savedGameState.trainerEncounter;
@@ -228,22 +223,10 @@ export const gameSlice = createSlice({
     encounterPokemon: (state, action: PayloadAction<PokemonEncounterType>) => {
       state.pokemonEncounter = action.payload;
     },
-    doubleEncounterPokemon: (state, action: PayloadAction<DoublePokemonEncounterType>) => {
-      state.doublePokemonEncounter = action.payload;
-    },
-    doubleBattle: (state, action: PayloadAction<DoublePokemonEncounterType>) => {
-      state.doublePokemonEncounter = action.payload;
-    },
     endEncounter: (state) => {
       state.pokemonEncounter = undefined;
     },
-    endDoubleEncounter: (state) => {
-      state.doublePokemonEncounter = undefined;
-    },
     setActivePokemon: (state, action: PayloadAction<number>) => {
-      state.activePokemonIndex = action.payload;
-    },
-    setDoubleActivePokemon: (state, action: PayloadAction<number>) => {
       state.activePokemonIndex = action.payload;
     },
     updatePokemonEncounter: (
@@ -255,9 +238,6 @@ export const gameSlice = createSlice({
     },
     updatePokemon: (state, action: PayloadAction<PokemonInstance>) => {
       state.pokemon[state.activePokemonIndex] = action.payload;
-    },
-    updateDoublePokemon: (state, action: PayloadAction<PokemonInstance>) => {
-      state.pokemon[state.doubleActivePokemonIndex] = action.payload;
     },
     updateSpecificPokemon: (
       state,
@@ -380,14 +360,10 @@ export const {
   load,
   swapPokemonPositions,
   encounterPokemon,
-  doubleEncounterPokemon,
-  doubleBattle,
   endEncounter,
   setActivePokemon,
-  setDoubleActivePokemon,
   updatePokemonEncounter,
   updatePokemon,
-  updateDoublePokemon,
   updateSpecificPokemon,
   recoverFromFainting,
   resetActivePokemon,
@@ -431,17 +407,8 @@ export const selectPokemon = (state: RootState) => state.game.pokemon;
 export const selectPokemonEncounter = (state: RootState) =>
   state.game.pokemonEncounter;
 
-export const selectDoublePokemonEncounter = (state: RootState) =>
-  state.game.doublePokemonEncounter;
-
 export const selectActivePokemon = (state: RootState) =>
   state.game.pokemon[state.game.activePokemonIndex];
-
-export const selectDoubleActivePokemon = (state: RootState) =>
-  state.game.pokemon[state.game.activePokemonIndex];
-
-export const selectDoubleBattle = (state: RootState) =>
-  state.game.trainerEncounter;
 
 export const selectJumping = (state: RootState) => state.game.jumping;
 
@@ -462,9 +429,6 @@ export const selectCompletedQuests = (state: RootState) =>
   state.game.completedQuests;
 
 export const selectActivePokemonIndex = (state: RootState) =>
-  state.game.activePokemonIndex;
-
-export const selectDoubleActivePokemonIndex = (state: RootState) =>
   state.game.activePokemonIndex;
 
 export default gameSlice.reducer;

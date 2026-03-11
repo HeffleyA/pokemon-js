@@ -12,6 +12,7 @@ import {
   GameState,
   InventoryItemType,
   PokemonEncounterType,
+  DoublePokemonEncounterType,
   PokemonInstance,
   PosType,
 } from "./state-types";
@@ -223,8 +224,14 @@ export const gameSlice = createSlice({
     encounterPokemon: (state, action: PayloadAction<PokemonEncounterType>) => {
       state.pokemonEncounter = action.payload;
     },
+    doubleEncounterPokemon: (state, action: PayloadAction<DoublePokemonEncounterType>) => {
+      state.doublePokemonEncounter = action.payload;
+    },
     endEncounter: (state) => {
       state.pokemonEncounter = undefined;
+    },
+    endDoubleEncounter: (state) => {
+      state.doublePokemonEncounter = undefined;
     },
     setActivePokemon: (state, action: PayloadAction<number>) => {
       state.activePokemonIndex = action.payload;

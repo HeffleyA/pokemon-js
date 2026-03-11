@@ -209,6 +209,7 @@ export const gameSlice = createSlice({
       state.pokemon = savedGameState.pokemon;
       state.pokemonEncounter = savedGameState.pokemonEncounter;
       state.pokemonDoubleEncounter = savedGameState.doublePokemonEncounter;
+      state.doubleBattle = savedGameState.doubleBattle;
       state.activePokemonIndex = savedGameState.activePokemonIndex;
       state.activeDoublePokemonIndex = savedGameState.doubleActivePokemonIndex;
       state.money = savedGameState.money;
@@ -228,6 +229,9 @@ export const gameSlice = createSlice({
       state.pokemonEncounter = action.payload;
     },
     doubleEncounterPokemon: (state, action: PayloadAction<DoublePokemonEncounterType>) => {
+      state.doublePokemonEncounter = action.payload;
+    },
+    doubleBattle: (state, action: PayloadAction<DoublePokemonEncounterType>) => {
       state.doublePokemonEncounter = action.payload;
     },
     endEncounter: (state) => {
@@ -377,6 +381,7 @@ export const {
   swapPokemonPositions,
   encounterPokemon,
   doubleEncounterPokemon,
+  doubleBattle,
   endEncounter,
   setActivePokemon,
   setDoubleActivePokemon,

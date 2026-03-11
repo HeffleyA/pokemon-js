@@ -552,8 +552,8 @@ const PokemonEncounter = () => {
   const enemyMetadata = usePokemonMetadata(enemy?.id || null);
   const enemyStats = usePokemonStats(enemy?.id || 1, enemy?.level || 1);
   const enemy2 = useSelector(selectDoublePokemonEncounter);
-  const enemy2Metadata = usePokemonMetadata(enemy2?.id || null);
-  const enemy2Stats = usePokemonStats(enemy2?.id || 1, enemy2?.level || 1);
+  const enemy2Metadata = usePokemonMetadata(enemy2?.pokemon2.id || null);
+  const enemy2Stats = usePokemonStats(enemy2?.pokemon2.id || 1, enemy2?.pokemon2.level || 1);
   const active = useSelector(selectActivePokemon);
   const activeMetadata = usePokemonMetadata(active?.id || null);
   const activeStats = usePokemonStats(active?.id || 1, active?.level || 1);
@@ -698,7 +698,7 @@ const PokemonEncounter = () => {
       if (isDoubleBattle && trainerPokemonIndex < trainer?.pokemon.length - 2) {
         const newPokemon2 = trainer?.pokemon[newIndex + 1];
         dispatch(
-          doubleEncounterPokemon(getPokemonEncounter(newPokemon.id, newPokemon.level), getPokemonEncounter(newPokemon2.id, newPokemon2.level))
+          doubleEncounterPokemon({ pokemon1: getPokemonEncounter(newPokemon.id, newPokemon.level), pokemon2: getPokemonEncounter(newPokemon2.id, newPokemon2.level) })
         )
       }
       else {
@@ -755,7 +755,7 @@ const PokemonEncounter = () => {
   useEffect(() => {
     if (isInBattle) {
       dispatch(resetActivePokemon());
-      dispatch(resetDoubleActivePokemon());
+      //dispatch(resetDoubleActivePokemon());
       setStage(0);
       setTimeout(() => {
         setStage(1);
@@ -1044,20 +1044,22 @@ const PokemonEncounter = () => {
           hp: enemyStats.hp,
         })
       );
-      dispatch(
-        addPokemon({
-          id: enemy2.id,
-          level: enemy2.level,
-          xp: 0,
-          moves: enemy2.moves.map((move) => {
-            return {
-              id: move,
-              pp: getMoveMetadata(move).pp || 0,
-            };
-          }),
-          hp: enemy2Stats.hp,
-        })
-      );
+      if (doubleBattle) {
+        dispatch(
+          addPokemon({
+            id: enemy2.pokemon2.id,
+            level: enemy2.pokemon2.level,
+            xp: 0,
+            moves: enemy2.pokemon2.moves.map((move) => {
+              return {
+                id: move,
+                pp: getMoveMetadata(move).pp || 0,
+              };
+            }),
+            hp: enemy2Stats.hp,
+          })
+        );
+      }
       endEncounter_();
     }
 
@@ -1090,13 +1092,13 @@ const PokemonEncounter = () => {
       if (isTrainer) {
         return `${trainer?.npc.name.toUpperCase()} wants to fight!`;
       }
-      return `Wild ${enemyMetadata.name.toUpperCase()} appeared!`;
+      return `Wild ${enemyMetadata?.name.toUpperCase()} appeared!`;
     }
     if (stage >= 4 && stage < 10)
-      return `Go! ${activeMetadata.name.toUpperCase()}!`;
+      return `Go! ${activeMetadata?.name.toUpperCase()}!`;
     if (stage === 12) return "Got away safely!";
     if (stage === 20)
-      return `Enemy ${enemyMetadata.name.toUpperCase()} fainted!`;
+      return `Enemy ${enemyMetadata?.name.toUpperCase()} fainted!`;
     if (stage === 21) {
       if (!processingMetadata) throw new Error("No processing metadata found");
       return `${processingMetadata.name.toUpperCase()} gained ${Math.round(
@@ -1108,7 +1110,7 @@ const PokemonEncounter = () => {
       return `${processingMetadata.name.toUpperCase()} grew to level ${getLevelData(processingPokemon.level, processingPokemon.xp).level
         }!`;
     }
-    if (stage === 24) return `${activeMetadata.name.toUpperCase()} fainted!`;
+    if (stage === 24) return `${activeMetadata?.name.toUpperCase()} fainted!`;
     if (stage === 26) return `${name} is out of usable POKéMON!`;
     if (stage === 27) return `${name} blacked out!`;
     if (stage === 29) {
@@ -1130,9 +1132,9 @@ const PokemonEncounter = () => {
     if (stage === 43) return `Aww! It appeared to be caught!`;
     if (stage === 44) return `Shoot! It was so close too!`;
     if (stage === 45)
-      return `All right! ${enemyMetadata.name.toUpperCase()} was caught!`;
+      return `All right! ${enemyMetadata?.name.toUpperCase()} was caught!`;
     if (stage === 48 || stage === 49) {
-      return `${trainer?.npc.name.toUpperCase()} sent out ${enemyMetadata.name.toUpperCase()}!`;
+      return `${trainer?.npc.name.toUpperCase()} sent out ${enemyMetadata?.name.toUpperCase()}!`;
     }
     if (stage === 50)
       return `${name.toUpperCase()} defeated ${trainer?.npc.name.toUpperCase()}!`;
@@ -1146,11 +1148,11 @@ const PokemonEncounter = () => {
   };
 
   const getRandomEnemyMove = () => {
-    return enemy.moves[Math.floor(Math.random() * enemy.moves.length)];
+    return enemy?.moves[Math.floor(Math.random() * enemy?.moves.length)];
   };
 
   const getRandomEnemy2Move = () => {
-    return enemy2.moves[Math.floor(Math.random() * enemy2.moves.length)];
+    return enemy2?.pokemon2.moves[Math.floor(Math.random() * enemy2?.pokemon2.moves.length)];
   };
 
   const getActiveMovesFirst = (
@@ -1188,7 +1190,7 @@ const PokemonEncounter = () => {
     } = result;
     if (isAttacking) {
       setAlertText(
-        `${activeMetadata.name.toUpperCase()} used ${moveName.toUpperCase()}!`
+        `${activeMetadata?.name.toUpperCase()} used ${moveName.toUpperCase()}!`
       );
       setStage(15);
       setTimeout(() => {
@@ -1196,7 +1198,7 @@ const PokemonEncounter = () => {
         dispatch(updatePokemon(us));
 
         if (missed) {
-          setAlertText(`${activeMetadata.name.toUpperCase()}'s attack missed!`);
+          setAlertText(`${activeMetadata?.name.toUpperCase()}'s attack missed!`);
         } else if (critical) {
           setAlertText(`A critical hit!`);
           setStage(17);
@@ -1214,7 +1216,7 @@ const PokemonEncounter = () => {
 
     if (!isAttacking) {
       setAlertText(
-        `Enemy ${enemyMetadata.name.toUpperCase()} used ${moveName.toUpperCase()}!`
+        `Enemy ${enemyMetadata?.name.toUpperCase()} used ${moveName.toUpperCase()}!`
       );
 
       setStage(18);
@@ -1223,7 +1225,7 @@ const PokemonEncounter = () => {
         dispatch(updatePokemon(us));
 
         if (missed) {
-          setAlertText(`${enemyMetadata.name.toUpperCase()}'s attack missed!`);
+          setAlertText(`${enemyMetadata?.name.toUpperCase()}'s attack missed!`);
         } else if (critical) {
           setAlertText(`A critical hit!`);
           setStage(19);
@@ -1343,7 +1345,7 @@ const PokemonEncounter = () => {
     if (stage === 7) return ball3;
     if (stage === 8) return ball4;
     if (stage === 9) return ball5;
-    if (stage >= 10) return activeMetadata.images.back;
+    if (stage >= 10) return activeMetadata?.images.back;
   };
 
   const rightImage = () => {
@@ -1360,7 +1362,7 @@ const PokemonEncounter = () => {
     if (stage === 46) return trainer?.npc.portrait;
     if (stage === 51) return trainer?.npc.portrait;
     if (stage === 52) return trainer?.npc.portrait;
-    return enemyMetadata.images.front;
+    return enemyMetadata?.images.front;
   };
 
   return (
@@ -1388,13 +1390,13 @@ const PokemonEncounter = () => {
                         : "0",
                   }}
                 >
-                  <Name>{enemyMetadata.name}</Name>
-                  <Level>{`:L${enemy.level}`}</Level>
+                  <Name>{enemyMetadata?.name}</Name>
+                  <Level>{`:L${enemy?.level}`}</Level>
                   <HealthBarContainer>
                     <HealthBar
                       big
-                      currentHealth={enemy.hp}
-                      maxHealth={enemyStats.hp}
+                      currentHealth={enemy?.hp}
+                      maxHealth={enemyStats?.hp}
                     />
                   </HealthBarContainer>
                   <Corner src={corner} />
@@ -1420,16 +1422,16 @@ const PokemonEncounter = () => {
                         : "0",
                   }}
                 >
-                  <Name>{activeMetadata.name}</Name>
-                  <Level>{`:L${active.level}`}</Level>
+                  <Name>{activeMetadata?.name}</Name>
+                  <Level>{`:L${active?.level}`}</Level>
                   <HealthBarContainer>
                     <HealthBar
                       big
-                      currentHealth={active.hp}
-                      maxHealth={activeStats.hp}
+                      currentHealth={active?.hp}
+                      maxHealth={activeStats?.hp}
                     />
                   </HealthBarContainer>
-                  <Health>{`${active.hp}/${activeStats.hp}`}</Health>
+                  <Health>{`${active?.hp}/${activeStats?.hp}`}</Health>
                   <CornerContainer>
                     <CornerRight src={corner} />
                   </CornerContainer>
@@ -1450,13 +1452,13 @@ const PokemonEncounter = () => {
                         : "0",
                   }}
                 >
-                  <Name>{enemy2Metadata.name}</Name>
-                  <Level>{`:L${enemy2.level}`}</Level>
+                  <Name>{enemy2Metadata?.name}</Name>
+                  <Level>{`:L${enemy2?.pokemon2.level}`}</Level>
                   <HealthBarContainer>
                     <HealthBar
                       big
-                      currentHealth={enemy2.hp}
-                      maxHealth={enemy2Stats.hp}
+                      currentHealth={enemy2?.pokemon2.hp}
+                      maxHealth={enemy2Stats?.hp}
                     />
                   </HealthBarContainer>
                   <Corner src={corner} />
@@ -1482,16 +1484,16 @@ const PokemonEncounter = () => {
                         : "0",
                   }}
                 >
-                  <Name>{active2Metadata.name}</Name>
-                  <Level>{`:L${active2.level}`}</Level>
+                  <Name>{active2Metadata?.name}</Name>
+                  <Level>{`:L${active2?.level}`}</Level>
                   <HealthBarContainer>
                     <HealthBar
                       big
-                      currentHealth={active2.hp}
-                      maxHealth={active2Stats.hp}
+                      currentHealth={active2?.hp}
+                      maxHealth={active2Stats?.hp}
                     />
                   </HealthBarContainer>
-                  <Health>{`${active2.hp}/${active2Stats.hp}`}</Health>
+                  <Health>{`${active2?.hp}/${active2Stats?.hp}`}</Health>
                   <CornerContainer>
                     <CornerRight src={corner} />
                   </CornerContainer>
